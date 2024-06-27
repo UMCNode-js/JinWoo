@@ -18,6 +18,7 @@ app.use('/api-docs', SwaggerUi.serve, SwaggerUi.setup(specs));
 
 app.use('/temp', tempRouter);
 app.use('/.user', userRouter);
+app.use('/:storeId', storeRouter); //ch10
 
 
 app.use((req, res, next) => {
