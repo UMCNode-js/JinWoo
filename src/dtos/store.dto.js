@@ -21,13 +21,3 @@ export const previewReviewResponseDTO = (data) => {
 const formatDate = (date) => {
     return new Intl.DateTimeFormat('kr').format(new Date(date)).replaceAll(" ", "").slice(0, -1);
 }
-
-
--------------------
-import { pool } from "../../config/db.config.js";
-import { BaseError } from "../../config/error.js";
-import { getReviewByReviewIdAtFirst, getReviewByReviewId } from "./store.sql";
-import { status } from "../../config/response.status";
-
-//가게아이디, size, cursorId를 사용해 size만큼의 해당가게 리뷰를 반환 (이때 반환되는 데이터는 데이터베이스에서 가져온 날것의 데이터이다)
-
