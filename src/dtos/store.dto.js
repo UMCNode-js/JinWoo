@@ -1,20 +1,33 @@
 // store.dto.js
 
+
+//저장되어 있는 리뷰데이터를 배열형태로 reviews에 저장하여 통째로 리턴
+//데이터베이스로부터 전달받은 데이터들을 웹페이지데이터의 양식에 맞게 변환하여 반환
 export const previewReviewResponseDTO = (data) => {
 
     const reviews = [];
 
     for (let i = 0; i < data.length; i++) {
-        reviews.push({
+        reviews.push({ 
             "user_name": data[i].user_name,
             "rate": data[i].rate,
             "review_body": data[i].review_content,
             "create_date": formatDate(data[i].created_at)
         })
     }
-    return {"reviewData": reviews, "cursorId": data[data.length-1].review_id};
+    return {"reviewData": reviews, "cursorId": data[data.length-1].review_id};        
 }
 
 const formatDate = (date) => {
     return new Intl.DateTimeFormat('kr').format(new Date(date)).replaceAll(" ", "").slice(0, -1);
 }
+
+
+-------------------
+import { pool } from "../../config/db.config.js";
+import { BaseError } from "../../config/error.js";
+import { getReviewByReviewIdAtFirst, getReviewByReviewId } from "./store.sql";
+import { status } from "../../config/response.status";
+
+//가게아이디, size, cursorId를 사용해 size만큼의 해당가게 리뷰를 반환 (이때 반환되는 데이터는 데이터베이스에서 가져온 날것의 데이터이다)
+
