@@ -29,3 +29,6 @@ export const getMissionByMissionIdAtFirst =
 + "FROM mission m JOIN store s on m.store_id = s.id "
 + "WHERE m.store_id = ? " // 해당 테이블에서 해당 레코드의 id >> 몇번째 레코드인지
 + "ORDER BY m.id DESC LIMIT ? ;"
+
+
+// 

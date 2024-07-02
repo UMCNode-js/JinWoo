@@ -32,19 +32,17 @@ export const getPreviewMission = async (cursorId, size, storeId) => {
 
         //cursorId가 undefined이거나 null이다 >> 처음으로 조회를 시작했다. 
         if(cursorId == "undefined" || typeof cursorId == "undefined" || cursorId == null){
-            const [mssions] = await pool.query(getMissionByMissionIdAtFirst, [parseInt(storeId), parseInt(size)]);
+            const [missions] = await pool.query(getMissionByMissionIdAtFirst, [parseInt(storeId), parseInt(size)]);
             //리뷰 하나하나에대한 데이터 리턴
             conn.release();
-            return mssions;
+            return missions;
     
         }else{
-            const [mssions] = await pool.query(getMissionByMissionId, [parseInt(storeId), parseInt(cursorId), parseInt(size)]);
+            const [missions] = await pool.query(getMissionByMissionId, [parseInt(storeId), parseInt(cursorId), parseInt(size)]);
             conn.release();
-            return mssions;    
+            return missions;    
         }
     } catch (err) {
         throw new BaseError(status.PARAMETER_IS_WRONG);
     }
-
-    return missions;
 }

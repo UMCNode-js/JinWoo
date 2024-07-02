@@ -1,7 +1,7 @@
 import { response } from "../../config/response.js";
 import { status } from "../../config/response.status.js";
 
-import { joinUser, showUserReviews } from "../services/user.service.js";
+import { joinUser, getMyMission, getMyReview, setMissionSpec } from "../services/user.service.js";
 
 export const userSignin = async (req, res, next) => {
     console.log("회원가입을 요청하였습니다!");
@@ -14,5 +14,19 @@ export const userSignin = async (req, res, next) => {
 export const showUserReviews = async (req, res, next) => {
     console.log("자신의 리뷰들 요청");
 
-    res.send(response(status.SUCCESS, await showReview(req.body)));
+    res.send(response(status.SUCCESS, await getMyReview(req.body)));
+}
+
+//나의 진행 중인 미션 목록
+export const showUserMissions = async (req, res, next) => {
+    console.log("자신의 진행중인 미션 목록 요청");
+
+    res.send(response(status.SUCCESS, await getMyMission(req,body)));
+}
+
+//진행 중인 미션을 "진행 완료"로 바꾸기
+export const completeMission = async (req, res, next) => {
+    console.log("미션 완료처리");
+
+    res.send(response(status.SUCCESS, await setMissionSpec(req.body)));
 }

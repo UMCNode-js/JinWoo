@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: false})); // 단순 객체 문자열 형�
 app.use('/api-docs', SwaggerUi.serve, SwaggerUi.setup(specs));
 
 app.use('/temp', tempRouter);
-app.use('/user', userRouter); //ch9   ch10 1번, 3번
+app.use('/user', userRouter); //ch9   ch10 1번, 3번, 4번
 app.use('/:storeId', storeRouter); //ch10 실습, 미션2번
 
 
