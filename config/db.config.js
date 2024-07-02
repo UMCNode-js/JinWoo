@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+//연결은 단일 연결 방식이 아닌 Connection Pool을 사용할 텐데,
+// 간단히 설명하자면 DB 과부하를 방지하고 유동적으로 Connection을 관리하기 위해 Pool을 사용한다고 생각하면 됩니다.
 export const pool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',  // mysql의 hostname
     user: process.env.DB_USER || 'root',  // user 이름

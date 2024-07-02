@@ -1,8 +1,9 @@
 import { BaseError } from "../../config/error";
 import { status } from "../../config/response.status";
-import { signinResponseDTO } from "../dtos/user.dto"
+import { showReviewResponseDTO, signinResponseDTO } from "../dtos/user.dto"
 import { addUser, getUser, getUserPreferToUserID, setPrefer } from "../models/user.dao";
 
+//회원가입
 export const joinUser = async (body) => {
     const birth = new Date(body.birthYear, body.birthMonth, body.birthDay);
     const prefer = body.prefer;
@@ -25,4 +26,12 @@ export const joinUser = async (body) => {
         }
         return signinResponseDTO(await getUser(joinUserData), await getUserPreferToUserID(joinUserData));
     }
+}
+
+
+//사용자 작성 리뷰조회
+export const getMyReview = async (userId, query) => {
+    const {reviewId, size = 3} = query;
+    
+    return showReviewResponseDTO(await getUserMission(reviewId, size, userId));
 }

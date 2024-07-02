@@ -76,3 +76,26 @@ export const getUserPreferToUserID = async (userID) => {
         throw new BaseError(status.PARAMETER_IS_WRONG);
     }
 }
+
+//사용자 리뷰목록------------------------------------------------------------------------------------------------
+
+export const getPreviewReview = async (reviewId, size, userId) => {
+    try {
+        const conn = await pool.getConnection();
+
+        //cursorId가 undefined이거나 null이다 >> 처음으로 조회를 시작했다. 
+        if(reviewId == "undefined" || typeof reviewId == "undefined" || reviewId == null){
+            const [reviews] = await pool.query(getReviewByReviewIdAtFirst, [parseInt(userId), parseInt(size)]);
+            //리뷰 하나하나에대한 데이터 리턴
+            conn.release();
+            return reviews;
+    
+        }else{
+            const [reviews] = await pool.query(getReviewByReviewId, [parseInt(userId), parseInt(reviewId), parseInt(size)]);
+            conn.release();
+            return reviews;    
+        }
+    } catch (err) {
+        throw new BaseError(status.PARAMETER_IS_WRONG);
+    }
+}
