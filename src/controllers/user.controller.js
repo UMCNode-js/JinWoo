@@ -14,14 +14,14 @@ export const userSignin = async (req, res, next) => {
 export const showUserReviews = async (req, res, next) => {
     console.log("자신의 리뷰들 요청");
 
-    res.send(response(status.SUCCESS, await getMyReview(req.body)));
+    res.send(response(status.SUCCESS, await getMyReview(req.params.userId, req.body)));
 }
 
 //나의 진행 중인 미션 목록
 export const showUserMissions = async (req, res, next) => {
     console.log("자신의 진행중인 미션 목록 요청");
 
-    res.send(response(status.SUCCESS, await getMyMission(req,body)));
+    res.send(response(status.SUCCESS, await getMyMission(req.params.userId, req,body)));
 }
 
 //진행 중인 미션을 "진행 완료"로 바꾸기

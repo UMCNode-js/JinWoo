@@ -9,5 +9,5 @@ export const reviewPreview = async (req, res, next) => {
 
 //store.route.js에서 참조
 export const missionPreview = async () => {
-    return res.send(response(status.SUCCESS, await getMission(/*매개변수 추가해야함 */)));
+    return res.send(response(status.SUCCESS, await getMission(req.params.storeId, req.query)));
 }
